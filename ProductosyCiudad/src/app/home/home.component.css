@@ -1,0 +1,16 @@
+img{
+    display: block;
+    margin: 0 auto;
+    
+    width: 20%;
+  overflow:hidden;
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+    width: 200;
+    
+  }

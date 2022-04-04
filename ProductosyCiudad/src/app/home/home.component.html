@@ -1,0 +1,199 @@
+<div class="container">
+    <div>
+        <span>&nbsp;  </span>
+    </div>
+    <div class="row">
+        <div class="col d-flex flex-row justify-content-center align-content-center">
+            <button class="btn btn-danger" (click)="logout()" [disabled]="loading">Logout</button>
+        </div>
+        <div class="col d-flex flex-row justify-content-center align-content-center">
+            <button class="btn btn-dark " (click)="formulariocreacion()" [disabled]="loading">crear</button>
+        </div>
+    </div>
+<div>
+    <span>&nbsp;  </span>
+</div>
+  
+
+
+
+
+    <div class="row">
+        <div  *ngFor="let card of cards; let i=index">
+        
+          <div class="card">
+                <div class="container">
+                  <img
+                  src={{card.i}}
+                  class="card-img-top"
+                  alt=""
+                />
+                </div>     
+                  <div class="card-body">
+                      <div class="column-contenido">
+                          <h4>{{card.n}}</h4>
+                          <span>  </span>
+                      </div>
+                      
+                  </div>
+
+                  <div class="col d-flex flex-row justify-content-center align-content-center">
+                    <button class="btn btn-dark" (click)="seleccionar(card.id)" [disabled]="loading">ver</button>
+                </div>
+                <div>
+                    <span>&nbsp;  </span>
+                </div>
+                <div class="col d-flex flex-row justify-content-center align-content-center">
+                    <button class="btn btn-dark" (click)="eliminar(card.id)" [disabled]="loading">eliminar</button>
+                </div>
+                <div>
+                    <span>&nbsp;  </span>
+                </div>
+
+                  </div>
+              </div>
+         
+        </div>
+
+<span></span>
+
+
+        <div class="row">
+            
+            <div  *ngFor="let card of selecard; let i=index">
+                Producto elegido:
+              <div class="card">
+                <div class="card-body">
+                    
+                        <h4>{{card.id}} - {{card.n}}</h4>
+                        <span>  </span>
+                    
+                </div>
+                    <div class="container">
+                      <img
+                      src={{card.i}}
+                      class="card-img-top"
+                      alt=""
+                    />
+                    </div>     
+                      <div class="card-body">
+                              
+                              <p><b>Valor:</b> ${{card.p}}</p>
+                              <p><b>Stock:</b> {{card.c}}</p>
+                              <p><b>Obseraciones: </b>{{card.o}}</p>
+                              <div  *ngFor="let card2 of card.ci; let i=index">
+                                <input type="checkbox" [checked]="card2.s" (change)="card2.s = !card2.s">
+                                  {{card2.n}}
+                              </div>
+                      </div>
+                   
+    
+                    <div class="col d-flex flex-row justify-content-center align-content-center">
+                        <button class="btn btn-dark" (click)="editar(card.id)" [disabled]="loading">editar</button>
+                    </div>
+    
+    
+                </div>
+
+            </div>
+             
+        </div>
+    
+        <div class="row">
+            <div  *ngFor="let card of editcard; let i=index">
+                <h5 class="card-title">Editar Producto</h5>
+                <div  *ngFor="let card2 of card.ci; let i=index">
+                    <input type="checkbox" [checked]="card2.s" (change)="card2.s = !card2.s">
+                      {{card2.n}}
+                  </div>
+                  <input type="file" accept=".jpg,.jpeg" (change)="onFileChanged($event)">
+                  <div class="card-body">
+                    <form [formGroup]="form" (submit)="modificar()">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" id="Nombre" formControlName="Nombre" class="form-control" matInput placeholder={{card.n}} />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Precio">Precio</label>
+                                    <input type="text" id="Precio" formControlName="Precio" class="form-control" matInput placeholder={{card.p}}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Cantidad">Cantidad</label>
+                                    <input type="text" id="Cantidad" formControlName="Cantidad" class="form-control" matInput placeholder={{card.c}}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Observacion">Observacion</label>
+                                    <input type="text" id="Observacion" formControlName="Observacion" class="form-control" matInput placeholder={{card.o}}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex flex-row justify-content-center align-content-center">
+                                <button type="submit" class="btn btn-dark col-12" [disabled]="loading">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+               
+          
+
+            </div>
+             
+        </div>
+
+        <div class="row">
+            <div  *ngFor="let card of crearcard; let i=index">
+                
+                <h5 class="card-title">crear Producto</h5>
+                <div  *ngFor="let card2 of card.ci; let i=index">
+                    <input type="checkbox" [checked]="card2.s" (change)="card2.s = !card2.s">
+                      {{card2.n}}
+                  </div>
+                  <input type="file" accept=".jpg,.jpeg" (change)="onFileChanged($event)">
+                  <div class="card-body">
+                    <form [formGroup]="form" (submit)="agregarproducto()">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" id="Nombre" formControlName="Nombre" class="form-control" matInput placeholder={{card.n}} />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Precio">Precio</label>
+                                    <input type="text" id="Precio" formControlName="Precio" class="form-control" matInput placeholder={{card.p}}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Cantidad">Cantidad</label>
+                                    <input type="text" id="Cantidad" formControlName="Cantidad" class="form-control" matInput placeholder={{card.c}}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Observacion">Observacion</label>
+                                    <input type="text" id="Observacion" formControlName="Observacion" class="form-control" matInput placeholder={{card.o}}/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col d-flex flex-row justify-content-center align-content-center">
+                                <button type="submit" class="btn btn-dark col-12" [disabled]="loading">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+               
+                
+
+            </div>
+             
+        </div>
+
+
+
+
+    
+</div>
+
+  
+ 
